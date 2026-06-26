@@ -6,7 +6,7 @@ status: draft
 owner: data-squad
 layer: data
 sources:
-  - path: raw/레거시SQL/active_members.sql
+  - path: raw/legacy-sql/active_members.sql
 code:
   - src/reports/active_members.sql
 related:

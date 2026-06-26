@@ -6,7 +6,7 @@ status: confirmed
 owner: auth-squad
 layer: governance
 sources:
-  - path: raw/업무정책/password.md
+  - path: raw/business-policies/password.md
 related:
   - "[[capabilities/signup]]"
 traces: [REQ-002]
@@ -19,7 +19,7 @@ tags: [auth, security]
 이 규칙이 존재하는 이유.
 
 ## 출처
-- 명시: raw/업무정책/password.md (또는 [[queries/...]] 에서 역추출)
+- 명시: raw/business-policies/password.md (또는 [[queries/...]] 에서 역추출)
 
 ## 영향 기능
 - [[capabilities/signup]]
