@@ -14,8 +14,11 @@ export function parseDocument(text) {
     return { frontmatter: null, body: normalized, error: 'missing frontmatter' }
   }
   try {
-    const frontmatter = parse(match[1]) ?? {}
-    return { frontmatter, body: match[2] }
+    const parsed = parse(match[1]) ?? {}
+    if (typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return { frontmatter: null, body: match[2], error: 'invalid yaml: frontmatter is not a mapping' }
+    }
+    return { frontmatter: parsed, body: match[2] }
   } catch (e) {
     return { frontmatter: null, body: match[2], error: `invalid yaml: ${e.message}` }
   }

@@ -19,11 +19,17 @@ test('reports missing frontmatter', () => {
 
 test('reports invalid yaml', () => {
   const { error } = parseDocument('---\nid: [unclosed\n---\nbody\n')
-  assert.match(error, /invalid yaml/)
+  assert.match(error, /^invalid yaml: .+/)
 })
 
 test('handles CRLF line endings', () => {
   const { frontmatter, error } = parseDocument('---\r\nid: x\r\n---\r\nbody\r\n')
   assert.equal(error, undefined)
   assert.equal(frontmatter.id, 'x')
+})
+
+test('treats a scalar frontmatter block as invalid', () => {
+  const { frontmatter, error } = parseDocument('---\njust a string\n---\nbody\n')
+  assert.equal(frontmatter, null)
+  assert.match(error, /^invalid yaml: .+/)
 })
