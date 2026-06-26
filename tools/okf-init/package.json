@@ -1,0 +1,12 @@
+{
+  "name": "okf-init",
+  "version": "0.1.0",
+  "description": "Scaffold a project OKF bundle (raw/ wiki/ log/ index.md)",
+  "type": "module",
+  "bin": {
+    "okf-init": "src/cli.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
