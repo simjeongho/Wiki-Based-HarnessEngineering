@@ -6,7 +6,7 @@ status: draft
 owner: payments-squad
 layer: application
 sources:
-  - path: raw/인터페이스정의서/payment.md
+  - path: raw/interface-specs/payment.md
 related:
   - "[[capabilities/checkout]]"
 tags: [external, api]
@@ -19,7 +19,7 @@ REST / SOAP / MQ …
 - 응답: …
 
 ## 시퀀스
-원본 다이어그램: raw/인터페이스정의서/payment-sequence.png
+원본 다이어그램: raw/interface-specs/payment-sequence.png
 
 ## 에러 처리
 - …

@@ -6,7 +6,7 @@ status: confirmed
 owner: platform-squad
 layer: application
 sources:
-  - path: raw/공통/design-system-readme.md
+  - path: raw/common/design-system-readme.md
 related:
   - "[[capabilities/signup]]"
 tags: [commons, ui]

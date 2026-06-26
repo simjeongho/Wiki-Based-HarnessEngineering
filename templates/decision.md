@@ -6,7 +6,7 @@ status: confirmed
 owner: auth-squad
 layer: application
 sources:
-  - path: raw/회의록·계약·제안서/2026-06-20-auth-design.md
+  - path: raw/meetings-contracts/2026-06-20-auth-design.md
 related:
   - "[[capabilities/signup]]"
 tags: [adr, auth]

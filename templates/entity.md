@@ -6,7 +6,7 @@ status: confirmed
 owner: auth-squad
 layer: data
 sources:
-  - path: raw/데이터모델/member.md
+  - path: raw/data-models/member.md
 related:
   - "[[policies/password-rule]]"
 tags: [auth]
