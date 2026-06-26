@@ -1,0 +1,15 @@
+{
+  "name": "okf-lint",
+  "version": "0.1.0",
+  "description": "OKF bundle conformance linter for the LLM-Wiki SI harness",
+  "type": "module",
+  "bin": {
+    "okf-lint": "src/cli.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "yaml": "^2.4.0"
+  }
+}
