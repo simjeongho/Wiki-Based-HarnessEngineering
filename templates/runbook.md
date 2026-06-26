@@ -6,7 +6,7 @@ status: draft
 owner: platform-squad
 layer: quality
 sources:
-  - path: raw/운영/deploy-runbook.md
+  - path: raw/operations/deploy-runbook.md
 related:
   - "[[infrastructure/prod-topology]]"
 tags: [ops]

@@ -6,7 +6,7 @@ status: draft
 owner: auth-squad
 layer: business
 sources:
-  - path: raw/업무정책/onboarding.md
+  - path: raw/business-policies/onboarding.md
 related:
   - "[[capabilities/signup]]"
 tags: [onboarding]

@@ -6,7 +6,7 @@ status: draft
 owner: platform-squad
 layer: infrastructure
 sources:
-  - path: raw/인프라/topology.md
+  - path: raw/infrastructure/topology.md
 related:
   - "[[runbooks/deploy]]"
 tags: [ops]

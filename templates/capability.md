@@ -6,7 +6,7 @@ status: confirmed
 owner: auth-squad
 layer: business
 sources:
-  - path: raw/화면정의서/signup.md
+  - path: raw/screen-definitions/signup.md
     ref: "Sheet2!A1:F30"
 code:
   - src/auth/signup/**
