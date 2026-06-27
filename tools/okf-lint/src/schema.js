@@ -26,6 +26,12 @@ export const REQUIRED_FIELDS = ['id', 'type', 'title', 'status', 'sources']
 
 /**
  * Validate one concept's frontmatter against the OKF schema.
+ * 검사 내역
+ * 1. 필수 필드 : (REQUIRED_FIELDS)가 존재하는가?
+ * 2. enum 값이 유효한가? : STATUSES에 정의된 상태로 status가 정의되었는가?
+ * 3. 폴더 <-> 타입이 일치하는가? : FOLDER_TO_TYPE에 정의된대로 경로와 타입이 일치하는가
+ * 4. id가 파일 명과 일치하는가?
+ * 5. source에 raw 파일 원천 소스가 비어있지는 않은가?
  * @param {object|null} fm
  * @param {{id?: string, folder?: string}} ctx
  * @returns {string[]} error messages (empty = valid)
