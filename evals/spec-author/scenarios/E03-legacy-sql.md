@@ -9,6 +9,25 @@ WHERE m.status = 'active'
   AND m.last_login_at > NOW() - INTERVAL '90 days';
 ```
 
+## wiki-before (path: wiki/entities/member.md)
+```
+---
+id: member
+type: entity
+title: 회원
+status: confirmed
+owner: auth-squad
+layer: data
+sources:
+  - path: raw/data-models/member.md
+---
+## 속성
+| 속성 | 타입 | 설명 |
+|---|---|---|
+| status | string | active/dormant/withdrawn |
+| last_login_at | timestamp | 최근 로그인 시각 |
+```
+
 ## rubric
 
 ### MUST
