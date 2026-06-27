@@ -17,8 +17,14 @@ export function extractLinks(fm, body) {
     let m
     while ((m = re.exec(text)) !== null) targets.add(m[1].trim())
   }
-  if (fm && Array.isArray(fm.related)) {
-    for (const r of fm.related) scan(r)
+  const scanField = (v) => {
+    if (Array.isArray(v)) v.forEach(scan)
+    else scan(v)
+  }
+  if (fm) {
+    scanField(fm.related)
+    scanField(fm.supersedes)
+    scanField(fm.superseded_by)
   }
   scan(body)
   return [...targets]
