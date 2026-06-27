@@ -32,3 +32,18 @@ test('resolveLink strips anchors before resolving', () => {
   writeFileSync(join(root, 'entities', 'member.md'), '')
   assert.equal(resolveLink('entities/member#attributes', [root]), true)
 })
+
+test('extracts links from supersedes and superseded_by fields', () => {
+  const fm = {
+    related: ['[[entities/member]]'],
+    supersedes: '[[decisions/old-auth]]',
+    superseded_by: ['[[decisions/new-auth]]'],
+  }
+  assert.deepEqual(
+    extractLinks(fm, '').sort(),
+    ['decisions/new-auth', 'decisions/old-auth', 'entities/member'])
+})
+
+test('supersession fields are optional', () => {
+  assert.deepEqual(extractLinks({ related: [] }, 'no links'), [])
+})

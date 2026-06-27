@@ -63,3 +63,25 @@ test('empty or pathless sources are reported', () => {
     { id: 'x', folder: 'entities' })
   assert.ok(pathless.some(e => e.includes('sources[0] missing path')))
 })
+
+test('superseded_by requires deprecated status', () => {
+  const live = validateFrontmatter(
+    { id: 'old', type: 'decision', title: 't', status: 'confirmed',
+      sources: [{ path: 'r' }], superseded_by: '[[decisions/new]]' },
+    { id: 'old', folder: 'decisions' })
+  assert.ok(live.some(e => e.includes('superseded_by requires status: deprecated')))
+
+  const deprecated = validateFrontmatter(
+    { id: 'old', type: 'decision', title: 't', status: 'deprecated',
+      sources: [{ path: 'r' }], superseded_by: '[[decisions/new]]' },
+    { id: 'old', folder: 'decisions' })
+  assert.ok(!deprecated.some(e => e.includes('superseded_by requires status: deprecated')))
+})
+
+test('supersedes alone does not force deprecated', () => {
+  const errs = validateFrontmatter(
+    { id: 'new', type: 'decision', title: 't', status: 'confirmed',
+      sources: [{ path: 'r' }], supersedes: '[[decisions/old]]' },
+    { id: 'new', folder: 'decisions' })
+  assert.ok(!errs.some(e => e.includes('superseded_by requires status: deprecated')))
+})

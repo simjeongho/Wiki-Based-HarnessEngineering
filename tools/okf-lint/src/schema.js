@@ -71,6 +71,16 @@ export function validateFrontmatter(fm, { id, folder } = {}) {
     }
   }
 
+  const supersededBy = fm.superseded_by
+  const hasSupersededBy =
+    supersededBy !== undefined &&
+    supersededBy !== null &&
+    supersededBy !== '' &&
+    !(Array.isArray(supersededBy) && supersededBy.length === 0)
+  if (hasSupersededBy && fm.status !== 'deprecated') {
+    errors.push('superseded_by requires status: deprecated')
+  }
+
   if (Array.isArray(fm.sources)) {
     if (fm.sources.length === 0) {
       errors.push('sources must not be empty')

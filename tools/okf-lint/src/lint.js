@@ -4,6 +4,8 @@ import { parseDocument } from './frontmatter.js'
 import { validateFrontmatter } from './schema.js'
 import { extractLinks, resolveLink } from './links.js'
 
+const RESERVED_FILES = new Set(['index.md', 'README.md', 'CLAUDE.md'])
+
 /**
  * Lint a single concept file.
  * @param {string} absPath
@@ -52,7 +54,11 @@ function walk(dir) {
     const full = join(dir, entry.name)
     if (entry.isDirectory()) {
       out.push(...walk(full))
-    } else if (entry.name.endsWith('.md') && !entry.name.startsWith('_')) {
+    } else if (
+      entry.name.endsWith('.md') &&
+      !entry.name.startsWith('_') &&
+      !RESERVED_FILES.has(entry.name)
+    ) {
       out.push(full)
     }
   }

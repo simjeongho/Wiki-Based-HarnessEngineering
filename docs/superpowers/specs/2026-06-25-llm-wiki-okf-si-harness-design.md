@@ -188,9 +188,13 @@ related:                            # OKF 교차링크
 traces: [REQ-001, REQ-002]          # 요구사항 추적성
 tags: [auth, onboarding]
 last_verified: 2026-06-25
+supersedes:                         # 선택: 이 concept이 대체하는 과거 concept
+  - "[[decisions/old-auth]]"
+superseded_by:                      # 선택: 이 concept을 대체한 새 concept (있으면 status=deprecated)
+  - "[[decisions/new-auth]]"
 ---
 ```
-핵심 필드: `sources`(추적성), `code`(드리프트 검사 연결고리), `layer`/`traces`(EA식 단면 + 추적성).
+핵심 필드: `sources`(추적성), `code`(드리프트 검사 연결고리), `layer`/`traces`(EA식 단면 + 추적성). 대체 관계는 `supersedes`/`superseded_by`로 양방향 링크 — 과거 결정은 삭제하지 않고 `status: deprecated`로 보존(§7 트리거 ②, OQ#4).
 
 ### 타입별 본문 템플릿 (요지)
 
@@ -245,6 +249,8 @@ raw/화면정의서/<기능>.html  (확정된 렌더 결과 = 시각적 진실)
 
 원칙: **각 단계의 부산물로 wiki가 자동 축적된다.** SDD=concept 작성, TDD=`code` 필드 확정 → 별도 문서화 없이 개발이 wiki를 채운다.
 
+> **트리거 3개 + 공유 등뼈** (2026-06-27 확정): wiki 변경을 일으키는 이벤트는 ① 화면 확정(아래 [1][2]), ② **raw 산출물 ingest**(회의록·데이터모델·인터페이스정의서·레거시SQL 등 — 불규칙), ③ 코드/요구 변경(§9 운영 루프)의 3종이며, 모두 동일 등뼈로 수렴한다: `raw 적재(불변)+log[ingest]+index 갱신 → spec-author 증류·정합(생성 OR 갱신) → ★사람 승인 → 원자적 PR(raw+concept+ADR+log) → 게이트`. ①은 ②의 화면 전용 특수화, ③은 ②가 코드 변경을 동반한 형태다. 트리거 ②(일반 ingest)와 spec-author 정합(reconcile) 모드는 별도 sub-project(H/D')로 구현한다. **정제 vs 대체**: 모순 없는 갱신은 in-place(`sources` 누적·`last_verified` 갱신), 과거 판단을 뒤집으면 옛 concept을 `deprecated`+`superseded_by`로 보존하고 새 ADR을 `supersedes`로 연결(§5).
+
 ```
 [1] PI 화면 정의 (채팅)            skill: define-screen
     · commons-wiki/design-system.md 규칙대로 HTML/CSS 렌더 → 시연 → 반복
@@ -288,6 +294,8 @@ raw/화면정의서/<기능>.html  (확정된 렌더 결과 = 시각적 진실)
 
 ## 9. 운영 루프
 
+> 운영 루프는 §7 "공유 등뼈"의 트리거 ③(코드/요구 변경)이다. 빌드의 ingest 트리거 ②와 같은 흐름(그래프 진입 → 정합 → 사람 승인 → 원자적 PR → 게이트)을 쓰며, 차이는 진입 계기(코드 변경 vs raw 산출물 도착)뿐이다.
+
 ```
 [1] 수정 요청 도착
 [2] operate agent: 영향 capabilities/<기능> 허브에서 그래프 진입
@@ -305,7 +313,7 @@ raw/화면정의서/<기능>.html  (확정된 렌더 결과 = 시각적 진실)
 1. **PR 시점 게이트(§8)의 판정 기준** — 드리프트 true/false positive 처리, 어디까지 머지 차단할지, 사람 오버라이드 절차. (가장 큰 미해결 영역.)
 2. **화면 스키마(§6 2층) 직렬화 형식** — 마크다운 내 YAML 블록 vs 별도 `.schema.json` (JSON Schema 검증).
 3. commons → project **상속/오버라이드 메커니즘** 구체화 (링크 참조 vs 복사 vs 심볼릭).
-4. **자동 vs 수동 경계** — SDD 단계에서 어디까지 AI가 자동 생성하고 어디부터 사람이 승인하는지.
+4. **자동 vs 수동 경계** — SDD 단계에서 어디까지 AI가 자동 생성하고 어디부터 사람이 승인하는지. *(부분 해소 2026-06-27: 초기 단계에서는 ingest의 concept 생성·갱신을 **사람 승인 선행**으로 결정 — §7 트리거 ②. 자동화 범위 확대는 신뢰 축적 후 재검토.)*
 5. 야간 wiki-lint의 **모순 탐지** 구체 알고리즘(임베딩 유사도? 규칙 기반?).
 6. `processes/`와 `capabilities/` 간 **중복·경계** 규약 (프로세스가 너무 비대해지지 않도록).
 

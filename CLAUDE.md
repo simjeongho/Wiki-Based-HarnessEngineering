@@ -51,11 +51,12 @@ ci/                [공통→프로젝트] tools/ 호출 (okf-lint, drift-check)
 
 ## 4. frontmatter 규칙 (okf-lint가 강제)
 
-필수: `id`(=파일명, kebab), `type`(=폴더 매핑), `title`, `status`, `sources`(비어있으면 안 됨 — 모든 wiki는 raw 출처 기재). 권장: `owner`, `layer`, `code`, `related`, `traces`, `tags`, `last_verified`.
+필수: `id`(=파일명, kebab), `type`(=폴더 매핑), `title`, `status`, `sources`(비어있으면 안 됨 — 모든 wiki는 raw 출처 기재). 권장: `owner`, `layer`, `code`, `related`, `traces`, `tags`, `last_verified`, `supersedes`/`superseded_by`(대체 관계, `[[decisions/<id>]]`).
 
 - `status` ∈ `draft | confirmed | implemented | deprecated`
 - `layer` ∈ `business | data | application | infrastructure | quality | governance` (EA식 단면 facet)
 - **교차링크**: `[[<폴더>/<id>]]` (예: `[[entities/member]]`). 대상 파일이 존재해야 유효.
+- **대체(supersession)**: `superseded_by`가 있으면 `status`는 `deprecated`. 과거 결정은 지우지 않고 deprecated로 남겨 ADR 체인으로 보존(정제/대체 절차는 ingest 스킬 참조).
 
 ## 5. 워크플로 (요지)
 
