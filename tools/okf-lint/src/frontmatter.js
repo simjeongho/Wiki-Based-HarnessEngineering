@@ -4,6 +4,7 @@ const FRONTMATTER_RE = /^---\n([\s\S]*?)\n---\n?([\s\S]*)$/
 
 /**
  * Split a markdown document into YAML frontmatter and body.
+ * Markdown 상단의 Frontmatter(YAML 형식) 파싱이 가능한가 판단하는 lint 도구
  * @param {string} text
  * @returns {{frontmatter: object|null, body: string, error?: string}}
  */
