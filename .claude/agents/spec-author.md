@@ -56,4 +56,9 @@ model: sonnet
 
 ## 반환 전 self-check (결정적 백스톱)
 
-제안을 반환하기 전, 각 `operations[].content`를 임시 디렉터리의 `wiki/<type>/<id>.md`로 펼치고(필요하면 입력으로 받은 wiki-before도 함께) `node tools/okf-lint/src/cli.js <임시>/wiki`를 실행한다. `okf-lint: OK`가 아니면(깨진 링크·누락 필드·enum 위반·`superseded_by`인데 status≠deprecated) **고쳐서 다시** 확인한 뒤 반환한다.
+제안을 반환하기 전, 임시 디렉터리에 **오직 (a) 입력으로 받은 wiki-before + (b) 네 제안의 각 `operations[].content`** 만 `wiki/<type>/<id>.md`로 펼치고 `node tools/okf-lint/src/cli.js <임시>/wiki`를 실행한다. `okf-lint: OK`가 아니면(깨진 링크·누락 필드·enum 위반·`superseded_by`인데 status≠deprecated) **고쳐서 다시** 확인한 뒤 반환한다.
+
+**정직성 규칙(어기지 말 것):**
+- self-check 임시 번들에 **존재하지 않는 concept을 stub으로 지어내 린트를 통과시키지 마라.** 펼치는 것은 wiki-before + 네 제안뿐이다. 그래야 self-check가 호출자 게이트(H)와 같은 현실을 본다.
+- **dangling 링크 금지**: 네가 거는 `[[폴더/id]]`의 대상이 wiki-before에도 네 제안에도 없으면 → (a) 그 대상 concept을 함께 `create`하거나, (b) 그 링크를 빼라. 빈 링크를 남기고 "나중에 생기겠지"로 넘기지 마라.
+- self-check 결과를 보고할 때 **임시 번들에 펼친 파일 목록과 okf-lint 종료코드를 사실대로** 적는다(자기보고가 외부 검증과 어긋나면 안 된다).
