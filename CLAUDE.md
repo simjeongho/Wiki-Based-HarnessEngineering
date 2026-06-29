@@ -63,6 +63,8 @@ ci/                [공통→프로젝트] tools/ 호출 (okf-lint, drift-check)
 **빌드 루프** — 각 단계의 부산물로 wiki가 자동 축적:
 `define-screen`(PI 화면 정의) → `on-confirm` hook(raw ingest + capability 생성 + index/log 갱신) → `spec-author`(raw→entities/queries/policies/decisions 증류) → `tdd-implementer`(`code:` 확정, `last_verified` 갱신) → code-review → E2E → **PR 게이트**(drift-check + okf-lint).
 
+**ingest 트리거** — 불규칙 raw 산출물은 `/ingest` 스킬로 반영: 사람이 `raw/<폴더>/`에 배치 → 미반영분 스캔 → pre-pass 분류 가드 → `spec-author` 증류 → **파일 1건씩 사람 승인** → wiki/index/log 기록 → okf-lint 게이트. (`on-confirm`은 이 일반 트리거의 화면 전용 특수화.)
+
 **운영 루프** — capability 허브에서 그래프 진입 → 과거 why(log/decisions) 이해 → 코드+concept+ADR+log **원자적 동시 기록**(한 PR) → 동일 게이트.
 
 ## 6. 검증 (하이브리드)
@@ -84,5 +86,7 @@ ci/                [공통→프로젝트] tools/ 호출 (okf-lint, drift-check)
 node tools/okf-lint/src/cli.js wiki          # 이 프로젝트 wiki 번들 린트 (현재 clean)
 node tools/okf-init/src/cli.js <대상디렉터리> # 신규 프로젝트 번들 스캐폴드
 ```
+
+> 도구 코드 테스트·개발 명령(단일 테스트 실행 등)은 `tools/README.md` 참조.
 
 > `commons-wiki/` 는 카탈로그(`index.md`)·레퍼런스 prose가 concept과 섞여 있어 아직 린트하지 않는다. okf-lint가 **예약 파일(`index.md`/`README.md`/`CLAUDE.md`)을 건너뛰는** 개선(sub-project A 후속) 후에 `okf-lint commons-wiki` 를 게이트에 넣는다.
