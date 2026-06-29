@@ -34,3 +34,6 @@ last_verified: 2026-06-25
 
 ## 인수 기준 (TDD 시드)
 - [ ] …
+
+## 출처
+- [[raw/screen-definitions/signup]]

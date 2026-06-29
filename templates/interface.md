@@ -26,3 +26,6 @@ REST / SOAP / MQ …
 
 ## 외부 시스템 / 소유자
 - 시스템: … / 소유자: …
+
+## 출처
+- [[raw/interface-specs/payment]]

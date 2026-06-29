@@ -19,3 +19,6 @@ tags: [commons, ui]
 
 ## 코드 위치
 - `src/...` (또는 commons 패키지)
+
+## 출처
+- [[raw/common/design-system-readme]]

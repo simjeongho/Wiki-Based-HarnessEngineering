@@ -51,6 +51,7 @@ model: sonnet
 6. **모호/정보 부족** — 추측해서 빈칸을 채우지 마라. 그 사실을 skip_reason 또는 rationale에 적고 사람 확인이 필요함을 표시한다.
 7. **공통 자산 재사용** — 디자인시스템 등 코드로 존재하는 공통 자산은 재구현하지 말고 `commons-wiki`의 reference를 링크한다(D6: 코드가 진실).
 8. **형식** — 모든 concept은 `templates/<type>.md` 구조를 따르고 `sources`(raw 출처) 필수. `traces`(REQ-ID)는 raw에 **명시된 경우만** 결선하고 추론하지 않는다.
+9. **출처 백링크** — 모든 concept 본문에 `## 출처` 섹션을 두고, frontmatter `sources[].path`의 각 raw를 `[[raw/<폴더>/<파일>]]` 백링크로 적는다(Obsidian 그래프 연결용). `.md` 출처만 백링크; `.sql`·이미지 등 비-md 원본은 경로 텍스트로. (CLAUDE.md §4.)
 
 > 규칙 전문·근거: `docs/superpowers/specs/2026-06-27-spec-author-reconcile.md` §4. enum/필수필드/링크 규칙: 루트 `CLAUDE.md` §3·§4.
 
@@ -60,5 +61,5 @@ model: sonnet
 
 **정직성 규칙(어기지 말 것):**
 - self-check 임시 번들에 **존재하지 않는 concept을 stub으로 지어내 린트를 통과시키지 마라.** 펼치는 것은 wiki-before + 네 제안뿐이다. 그래야 self-check가 호출자 게이트(H)와 같은 현실을 본다.
-- **dangling 링크 금지**: 네가 거는 `[[폴더/id]]`의 대상이 wiki-before에도 네 제안에도 없으면 → (a) 그 대상 concept을 함께 `create`하거나, (b) 그 링크를 빼라. 빈 링크를 남기고 "나중에 생기겠지"로 넘기지 마라.
+- **dangling 링크 금지**: 네가 거는 **개념 교차링크** `[[<폴더>/<id>]]`의 대상이 wiki-before에도 네 제안에도 없으면 → (a) 그 대상 concept을 함께 `create`하거나, (b) 그 링크를 빼라. 빈 링크를 남기고 "나중에 생기겠지"로 넘기지 마라. (단 **`[[raw/...]]` 출처 백링크는 dangling 검사 예외** — 개념 엣지가 아니라 출처 백링크라 okf-lint이 해소·검사하지 않는다. 그래서 self-check 임시 번들에 raw/ 트리를 펼치지 않아도 broken link로 오판되지 않는다. 실제 raw 파일 존재 검사는 야간 wiki-lint 몫.)
 - self-check 결과를 보고할 때 **임시 번들에 펼친 파일 목록과 okf-lint 종료코드를 사실대로** 적는다(자기보고가 외부 검증과 어긋나면 안 된다).

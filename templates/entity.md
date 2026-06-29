@@ -27,3 +27,6 @@ tags: [auth]
 
 ## 사용처
 - [[capabilities/signup]]
+
+## 출처
+- [[raw/data-models/member]]

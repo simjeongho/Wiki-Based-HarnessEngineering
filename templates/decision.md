@@ -23,3 +23,6 @@ tags: [adr, auth]
 
 ## 결과 (트레이드오프)
 - 긍정 / 부정 영향
+
+## 출처
+- [[raw/meetings-contracts/2026-06-20-auth-design]]
