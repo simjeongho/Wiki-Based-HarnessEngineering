@@ -25,3 +25,6 @@ tags: [ops]
 
 ## 관련 capabilities·queries
 - [[capabilities/...]]
+
+## 출처
+- [[raw/operations/deploy-runbook]]

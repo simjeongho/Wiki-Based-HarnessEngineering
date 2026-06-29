@@ -30,3 +30,6 @@ tags: [report, legacy-sql]
 
 ## 코드 위치
 - `src/reports/active_members.sql`
+
+## 출처
+- `raw/legacy-sql/active_members.sql` (비-md 원본 — 경로로 표기; 백링크는 .md 출처에만)

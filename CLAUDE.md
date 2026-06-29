@@ -57,6 +57,7 @@ ci/                [공통→프로젝트] tools/ 호출 (okf-lint, drift-check)
 - `status` ∈ `draft | confirmed | implemented | deprecated`
 - `layer` ∈ `business | data | application | infrastructure | quality | governance` (EA식 단면 facet)
 - **교차링크**: `[[<폴더>/<id>]]` (예: `[[entities/member]]`). 대상 파일이 존재해야 유효.
+- **출처 백링크**: frontmatter `sources[].path`에 적은 각 raw 출처는 **본문 `## 출처` 섹션에 `[[raw/<폴더>/<파일>]]` 백링크로도 적는다**(Obsidian 그래프에 raw↔wiki 연결이 보이도록). `.md` 출처만 백링크; `.sql`·이미지 등 비-md 원본은 경로 텍스트로 표기. okf-lint은 `[[raw/...]]`를 개념 엣지가 아닌 **출처 백링크로 보고 해소하지 않는다**(출처 *존재* 검사는 야간 `wiki-lint` 몫 — §6).
 - **대체(supersession)**: `superseded_by`가 있으면 `status`는 `deprecated`. 과거 결정은 지우지 않고 deprecated로 남겨 ADR 체인으로 보존(정제/대체 절차는 ingest 스킬 참조).
 
 ## 5. 워크플로 (요지)

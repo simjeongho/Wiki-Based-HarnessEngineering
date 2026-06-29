@@ -30,6 +30,10 @@ export function lintFile(absPath, { wikiRoot, linkRoots }) {
     push('schema', msg)
   }
   for (const target of extractLinks(frontmatter, body)) {
+    // [[raw/...]] is a source backlink (Obsidian-navigable to the raw artifact), not a
+    // concept↔concept edge. okf-lint does not resolve it; source-path existence is
+    // wiki-lint's job (F, source integrity). Skip so it isn't flagged as a broken link.
+    if (target.split('#')[0].trim().startsWith('raw/')) continue
     if (!resolveLink(target, linkRoots)) push('links', `broken link: [[${target}]]`)
   }
   return findings
