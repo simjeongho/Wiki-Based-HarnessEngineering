@@ -25,6 +25,7 @@ commons-wiki/      [공통] 사내 공통 OKF 번들 (별도 카탈로그 common
   design-system.md / glossary.md / governance/ / patterns/ / conventions/
 raw/               [프로젝트] 원본·이미지 (불변). 하위 카테고리는 ASCII kebab: screen-definitions/ requirements/ data-models/ interface-specs/ business-policies/ meetings-contracts/ legacy-sql/ infrastructure/ operations/ common/
 log/               [프로젝트] append-only 변경 이력 (날짜별)
+reports/           [프로젝트] wiki-lint 야간 진단 리포트 (날짜별, 비차단 — log/와 형제)
 wiki/              [프로젝트] LLM 작성 OKF 번들 (자체 index 없음 — 루트 index.md가 카탈로그)
 src/               [프로젝트] 코드
 ci/                [공통→프로젝트] tools/ 호출 (okf-lint, drift-check)
@@ -70,7 +71,7 @@ ci/                [공통→프로젝트] tools/ 호출 (okf-lint, drift-check)
 ## 6. 검증 (하이브리드)
 
 - **결정적 스크립트 (PR 동기 게이트, 머지 차단)**: `okf-lint`(필수 frontmatter·enum·**구조적** 링크 유효성), `drift-check`(concept `code:` glob이 바뀐 파일과 겹치는데 미갱신 → 차단). `ci/` 에서 호출.
-- **LLM 스킬 (야간 비동기)**: `wiki-lint` — **링크를 타고 다니며 의미적 모순** 탐지, orphan, 출처 누락 리포트.
+- **LLM 스킬 (야간 비동기)**: `wiki-lint` — **링크를 타고 다니며 의미적 모순** 탐지, orphan, 출처 누락. 비차단 진단 → `reports/wiki-lint/<날짜>.md`에 리포트(wiki/raw/index/log 안 씀). 발견은 `/ingest`·operate로 처리.
 
 ## 7. 불변규칙 (위반 = 게이트 실패)
 
